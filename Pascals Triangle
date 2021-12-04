@@ -1,0 +1,26 @@
+#define ll int
+class Solution {
+public:
+    vector<vector<int>> generate(int n) {
+        vector<vector<ll>> pq;
+        for(ll i=0;i<n;i++)
+        {
+            vector<ll> z;
+            for(ll j=0;j<=i;j++)
+            {
+                ll x=i,y=1;
+                ll p=1;
+                for(ll k=1;k<=min(i-j,j);k++)
+                {
+                    p*=x;
+                    x--;
+                    p/=k;
+                }
+                z.push_back(p);
+            }
+            pq.push_back(z);
+        }
+        return pq;
+        
+    }
+};
