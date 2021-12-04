@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<vector<string>> displayTable(vector<vector<string>>& orders) {
+        vector<vector<string>> ans;
+        map<int,multiset<string>> pq;
+        vector<string> fi;
+        fi.push_back("Table");
+       set<string> pc;
+        for(auto it : orders)
+        {
+            pc.insert(it[2]);
+            int x=0;
+            string y=it[1];
+            for(char z : y)
+                x=(x*10)+(z-'0');
+            pq[x].insert(it[2]);
+        }
+        for(auto it : pc)
+            fi.push_back(it);
+        ans.push_back(fi);
+        fi.clear();
+        for(auto it : pq)
+        {
+            fi.push_back(to_string(it.first));
+            for(auto ip : pc)
+            {
+                fi.push_back(to_string(it.second.count(ip)));
+            }
+            ans.push_back(fi);
+            fi.clear();
+        }
+        
+        return ans;
+        
+    }
+};
