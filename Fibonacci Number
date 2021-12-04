@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int dp[10000];
+    int ff(int n)
+    {
+        if(n<0)
+            return 0;
+        if(dp[n]!=-1)
+            return dp[n];
+        dp[n]=ff(n-1)+ff(n-2);
+        return dp[n];
+    }
+    int fib(int n) {
+        for(int i=0;i<=n;i++)
+            dp[i]=-1;
+        dp[0]=0;
+        dp[1]=1;
+       return ff(n);
+        
+        
+    }
+};
