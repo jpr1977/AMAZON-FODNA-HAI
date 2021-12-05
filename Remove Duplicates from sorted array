@@ -1,0 +1,20 @@
+#define ll int
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        ll i,j,n=nums.size();
+        j=0;
+        ll c=0;
+        ll prev=INT_MAX;
+        for(auto it : nums)
+        {
+            if(it==prev)
+                continue;
+            prev=it;
+            c++;
+            nums[j]=it;
+            j++;
+        }
+        return c;
+    }
+};
