@@ -1,0 +1,30 @@
+#define ll int
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& in) {
+        sort(in.begin(),in.end());
+        int i,j,n,k;
+        vector<vector<int>> px;
+        ll a=in[0][0],b=in[0][1];
+        for(i=1;i<in.size();i++)
+        {
+            if(in[i][0]<=b)
+            {
+                b=max(b,in[i][1]);
+            }
+            else
+            {
+                vector<ll> pq;
+                pq.push_back(a);
+                pq.push_back(b);
+                px.push_back(pq);
+                a=in[i][0],b=in[i][1];
+            }
+        }
+        vector<ll> pq;
+        pq.push_back(a);
+        pq.push_back(b);
+        px.push_back(pq);
+        return px;
+    }
+};
