@@ -1,0 +1,44 @@
+#define ll int
+class Solution {
+public:
+    
+    vector<int> spiralOrder(vector<vector<int>>& ma) {
+        ll sx,ex,sy,ey,i;
+        sx=0,ex=ma.size()-1;
+        sy=0,ey=ma[0].size()-1;
+        vector<ll> ans;
+        while(sx<=ex && sy<=ey)
+        {
+            for(i=sy;i<=ey;i++)
+            {
+                ans.push_back(ma[sx][i]);
+            }
+            sx++;
+            if(sx>ex)
+                break;
+            for(i=sx;i<=ex;i++)
+            {
+                ans.push_back(ma[i][ey]);
+            }
+            ey--;
+            if(sy>ey)
+                break;
+            for(i=ey;i>=sy;i--)
+            {
+                ans.push_back(ma[ex][i]);
+            }
+             ex--;
+            if(sx>ex)
+                break;
+           
+            for(i=ex;i>=sx;i--)
+            {
+                ans.push_back(ma[i][sy]);
+            }
+            sy++;
+            
+        }
+        return ans;
+        
+    }
+};
