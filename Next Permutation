@@ -1,0 +1,32 @@
+#define ll int
+class Solution {
+public:
+    void nextPermutation(vector<int>& pq) {
+       ll i,j=-1,n=pq.size();
+        for(i=n-2;i>=0;i--)
+        {
+            if(pq[i]<pq[i+1])
+            {
+                j=i;
+                break;
+            }
+                
+        }
+        ll k=-1;
+        for(i=n-1;i>=0;i--)
+        {
+            if(j!=-1 && pq[i]>pq[j])
+            {
+                k=i;
+                break;
+            }
+        }
+        if(j!=-1)
+        {
+            swap(pq[j],pq[k]);
+        }
+        reverse(pq.begin()+j+1,pq.end());
+        
+        
+    }
+};
