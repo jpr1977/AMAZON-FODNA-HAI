@@ -1,0 +1,66 @@
+#define ll int
+class Solution {
+public:
+    map<pair<ll,ll>,set<char>> pq;
+    map<ll,set<char>> cc;
+    map<ll,set<char>> rr;
+    int solve(vector<vector<char>> &bo,int x,int y)
+    {
+       
+        if(x==8 && y==9)
+        {
+            return 1;
+        }
+        if(y==9)
+        {
+             
+            x=x+1;
+            y=0;
+        }
+        if(bo[x][y]!='.')
+        {
+            //cout<<x<<" "<<y<<endl;
+            return solve(bo,x,y+1);
+        }    
+        for(int i=1;i<=9;i++)
+        {
+            char z=('0'+i);
+            if(!rr[x].count(z) && !cc[y].count(z) && !pq[{x/3,y/3}].count(z))
+            {
+                //if(x==0 && y==7)
+               // cout<<x<<" "<<y<<" "<<z<<endl;
+                bo[x][y]=z;
+                pq[{x/3,y/3}].insert(z);
+                rr[x].insert(z);
+                cc[y].insert(z);
+                if(solve(bo,x,y+1))
+                    return 1;
+                bo[x][y]='.';
+                pq[{x/3,y/3}].erase(z);
+                rr[x].erase(z);
+                cc[y].erase(z);
+                
+            }
+        }
+        return 0;
+        
+    }
+    void solveSudoku(vector<vector<char>>& bo) {
+        ll i,j;
+        for(i=0;i<9;i++)
+        {
+            for(j=0;j<9;j++)
+            {
+                if(bo[i][j]!='.')
+                {
+                rr[i].insert(bo[i][j]);
+                cc[j].insert(bo[i][j]);
+                pq[{i/3,j/3}].insert(bo[i][j]);
+                }    
+                    
+            }
+        }
+        solve(bo,0,0);
+            
+    }
+};
