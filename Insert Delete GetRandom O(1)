@@ -1,0 +1,49 @@
+#define ll int
+class RandomizedSet {
+    private:
+    vector<ll> pq;
+    unordered_map<ll,ll> pg;
+public:
+    RandomizedSet() {
+        pq.clear();
+        pg.clear();
+    }
+    
+    bool insert(int val) {
+        if(pg.find(val)!=pg.end())
+        {
+            //cout<<pg[val]<<endl;
+            return false;
+        }
+        pq.push_back(val);
+        pg[val]=pq.size()-1;
+        return true;
+    }
+    
+    bool remove(int val) {
+        if(pg.find(val)==pg.end())
+            return false;
+        pg[pq.back()]=pg[val];
+        swap(pq[pg[val]],pq.back());
+        pq.pop_back();
+        pg.erase(val);
+        
+        return true;
+        
+    }
+    
+    int getRandom() {
+        //if(pq.size()!=0)
+        int n=pq.size();
+        return pq[rand()%n];
+        //return 147;
+    }
+};
+
+/**
+ * Your RandomizedSet object will be instantiated and called as such:
+ * RandomizedSet* obj = new RandomizedSet();
+ * bool param_1 = obj->insert(val);
+ * bool param_2 = obj->remove(val);
+ * int param_3 = obj->getRandom();
+ */
