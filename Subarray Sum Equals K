@@ -1,0 +1,17 @@
+#define ll int
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        ll i,j,l,r;
+        ll s=0,c=0;
+        map<ll,ll> pq;
+        pq[0]=1;
+        for(auto it : nums)
+        {
+            s+=it;
+            c+=pq[s-k];
+            pq[s]++;
+        }
+        return c;
+    }
+};
