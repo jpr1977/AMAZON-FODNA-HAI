@@ -1,0 +1,59 @@
+#define ll int
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        ll c=1,i,j;
+        ll sx,ex,sy,ey;
+        sx=0,sy=0;
+        ex=n-1;
+        ey=ex;
+       
+        vector<vector<ll>> pq(n,vector<ll> (n,0));
+        while(c<=n*n)
+        {
+            for(i=sy;i<=ey;i++)
+            {
+                pq[sx][i]=c;
+                c++;
+                if(c>n*n)
+                    break;
+            }
+            if(c>n*n)
+                    break;
+            sx++;
+            for(i=sx;i<=ex;i++)
+            {
+                pq[i][ey]=c;
+                c++;
+                if(c>n*n)
+                    break;
+            }
+            if(c>n*n)
+                    break;
+            ey--;
+            for(i=ey;i>=sy;i--)
+            {
+                pq[ex][i]=c;
+                c++;
+                if(c>n*n)
+                    break;
+            }
+            ex--;
+            if(c>n*n)
+                    break;
+            for(i=ex;i>=sx;i--)
+            {
+                pq[i][sy]=c;
+                c++;
+                if(c>n*n)
+                    break;
+                
+            }
+            if(c>n*n)
+                    break;
+            sy++;
+        }
+        return pq;
+        
+    }
+};
