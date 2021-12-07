@@ -1,0 +1,61 @@
+#define ll int
+class Solution {
+public:
+    ll visi[10][10];
+    ll dx[4]={1,0,-1,0};
+    ll dy[4]={0,1,0,-1};
+    
+    int dfs(ll p,ll q,string x,string wo,vector<vector<char>> &bo,ll n,ll m)
+    {
+        
+        //cout<<x<<" "<<p<<" "<<q<<endl;
+        if(x.size()>wo.size())
+            return 0;
+        if(x==wo)
+            return 1;
+        char c=bo[p][q];
+        visi[p][q]=1;
+        for(ll i=0;i<4;i++)
+        {
+            ll a,b;
+            a=p+dx[i];
+            b=q+dy[i];
+            if(a<0 || b<0 || b>(m-1) || a>(n-1))
+                continue;
+            if(bo[a][b]==wo[x.size()] && visi[a][b]==0)
+            {
+                x+=wo[x.size()];
+                if(dfs(a,b,x,wo,bo,n,m))
+                    return 1;
+                x.pop_back();
+            }
+           
+        }
+        visi[p][q]=0;
+        return 0;
+        
+    }
+    bool exist(vector<vector<char>>& bo, string wo) {
+        ll i,j,n,k,m;
+        n=bo.size();
+        m=bo[0].size();
+        
+        for(i=0;i<n;i++)
+        {
+            for(j=0;j<m;j++)
+            {
+                string x;
+                if( bo[i][j]==wo[0])
+                {
+                    x+=wo[0];
+                    if(dfs(i,j,x,wo,bo,n,m))
+                        return true;
+                }
+                
+            }
+        
+        }
+        return false;
+        
+    }
+};
