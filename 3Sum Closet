@@ -1,0 +1,49 @@
+#define ll long long
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nu, int ta) {
+        
+       
+        ll i,j,n=nu.size(),k1=10000000000000,k;
+        int ans;
+        sort(nu.begin(),nu.end());
+        for(i=0;i<n;i++)
+        {
+            j=i+1,k=n-1;
+            while(j<n && k>=0 && j<k)
+            {
+                ll p=nu[i]+nu[j]+nu[k];
+                
+               //cout<<p<<" "<<i<<" "<<j<<" "<<k<<endl;
+                ll y=abs(p-ta);
+                    if(y<k1)
+                    {
+                    
+                        ans=p;
+                        k1=y;
+                    }
+                if(p<=ta)
+                {
+                    
+                    ll x=nu[j];
+                    while(j<k && nu[j]==x)
+                    j++;
+                }
+                else 
+                {
+                   
+                    ll x=nu[k];
+                    while(j<k && nu[k]==x)
+                    k--;
+                    
+                }
+            }
+            ll c=nu[i];
+            while(i<n && nu[i]==c)
+                i++;
+            if(i<n)
+                i--;
+        }
+        return ans;
+    }
+};
