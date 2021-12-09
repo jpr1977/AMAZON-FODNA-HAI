@@ -1,0 +1,28 @@
+#define ll int
+class Solution {
+public:
+    void solve(int p,vector<vector<ll>> &pq,vector<ll> &ab,vector<ll> ca,int ta)
+    {
+        if(ta<0)
+            return ;
+        if(ta==0)
+        {
+            pq.push_back(ab);
+            return ;
+        }
+        for(int i=p;i<ca.size();i++)
+        {
+            ab.push_back(ca[i]);
+            solve(i,pq,ab,ca,ta-ca[i]);
+            ab.pop_back();
+        }
+    }
+   
+    vector<vector<int>> combinationSum(vector<int>& ca, int ta) {
+        vector<vector<int>> pq;
+        vector<ll> ab;
+        sort(ca.begin(),ca.end());
+        solve(0,pq,ab,ca,ta);
+        return pq;
+    }
+};
