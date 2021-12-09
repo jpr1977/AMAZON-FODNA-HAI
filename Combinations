@@ -1,0 +1,26 @@
+#define ll int
+class Solution {
+public:
+    void solve(int i,int n,int k,vector<vector<ll>> &pq,vector<ll> &v)
+    {
+        
+        if(v.size()==k)
+        {
+            pq.push_back(v);
+            return ;
+        }
+        if(i>n)
+            return ;
+        
+        v.push_back(i);
+        solve(i+1,n,k,pq,v);
+        v.pop_back();
+        solve(i+1,n,k,pq,v);
+    }
+    vector<vector<int>> combine(int n, int k) {
+        vector<vector<ll>> pq;
+        vector<ll> v;
+        solve(1,n,k,pq,v);
+        return pq;
+    }
+};
