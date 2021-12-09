@@ -1,0 +1,63 @@
+#define ll long long
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int ta) {
+        sort(nums.begin(),nums.end());
+        ll i,j,n=nums.size(),l,r;
+        vector<vector<int>> ab;
+        for(i=0;i<n;i++)
+        {
+            for(j=i+1;j<n-2;j++)
+            {
+                ll l=j+1,r=n-1;
+               
+                if(r<=l)
+                    break;
+                ll s=ta-nums[i]-nums[j];
+                ll p=nums[l]+nums[r];
+                while(l<r)
+                {
+                   if(s==p)
+                   {
+                     vector<int> z;
+                       z.push_back(nums[i]);
+                        z.push_back(nums[j]);
+                       z.push_back(nums[l]);
+                        z.push_back(nums[r]);
+                       ab.push_back(z);
+                   }
+                    if(p>=s)
+                    {
+                        p-=nums[r];
+                        ll x=nums[r];
+                        while(r>l && nums[r]==x)
+                            r--;
+                        if(r>l)
+                        p+=nums[r];
+                        
+                    }
+                    else
+                    {
+                        p-=nums[l];
+                        ll x=nums[l];
+                        while(l<r && nums[l]==x)
+                            l++;
+                        if(r>l)
+                        p+=nums[l];
+                    }
+                }
+                ll x=nums[j];
+                while(j<(n-2) && nums[j]==x)
+                    j++;
+                if(j<(n-2))
+                    j--;
+            }
+            ll x=nums[i];
+            while(i<n && nums[i]==x)
+                i++;
+            if(i<n)
+                i--;
+        }
+        return ab;
+    }
+};
