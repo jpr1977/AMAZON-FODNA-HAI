@@ -1,0 +1,18 @@
+#define ll int
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+       
+        int c=0,cu=0,nx=cu;
+        for(int i=0;i<nums.size()-1;i++)
+        {
+            nx=max(nx,i+nums[i]);
+            if(i==cu)
+            {
+                c++;
+                cu=nx;
+            }
+        }
+        return c;
+    }
+};
