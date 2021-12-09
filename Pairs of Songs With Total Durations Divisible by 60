@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int numPairsDivisibleBy60(vector<int>& time) {
+        map<int,int> pq;
+        int c=0;
+        for(auto it : time)
+        {
+            c+=pq[(60-it%60)%60];
+            pq[it%60]++;
+        }
+        return c;
+    }
+};
