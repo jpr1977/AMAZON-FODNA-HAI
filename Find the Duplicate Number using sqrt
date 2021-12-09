@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        //using squared method
+        int i,j,x=0,y=0;
+        int a,b;
+        int c=0,d=0;
+        int n=nums.size();
+        for(i=0;i<n;i++)
+        {
+            x+=(i+1)*(i+1);
+            a=nums[i];
+            y+=(a*a);
+            c+=(i+1);
+            d+=nums[i];
+        }
+        a=x-y;
+        cout<<a<<endl;
+        c-=d;
+        cout<<c<<endl;
+        b=a/c;
+       b+=c;
+        b/=2;
+        a=b-c;
+        cout<<a<<" "<<b<<endl;
+        for(i=0;i<n;i++)
+        {
+            if(nums[i]==a)
+                return a;
+            if(nums[i]==b)
+                return b;
+        }
+        return 0;
+    }
+};
