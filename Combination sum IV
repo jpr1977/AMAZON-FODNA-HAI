@@ -1,0 +1,23 @@
+#define ll int
+class Solution {
+public:
+    int combinationSum4(vector<int>& nums, int target) {
+        vector<ll> dp(1005,0);
+        ll i,j,n,k;
+        dp[0]=1;
+        n=nums.size();
+        for(i=1;i<=target;i++)
+        {
+            for(auto it : nums)
+            {
+                if(it<=i)
+                    dp[i]+=dp[i-it];
+            }
+        }
+        for(i=1;i<=target;i++)
+            cout<<dp[i]<<" ";
+        cout<<endl;
+        return dp[target];
+        
+    }
+};
