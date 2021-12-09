@@ -1,0 +1,21 @@
+#define ll int
+class Solution {
+public:
+    int maxScore(vector<int>& ca, int k) {
+        ll i,j,n=ca.size();
+        vector<ll> pp(n+1,0);
+        pp[0]=0;
+        for(i=0;i<n;i++)
+        {
+            pp[i+1]+=pp[i]+ca[i];
+        }
+        ll mx=pp[k];
+        ll v=0;
+        for(i=1;i<=k;i++)
+        {
+            v+=ca[n-i];
+            mx=max(mx,v+pp[k-i]);
+        }
+        return mx;
+    }
+};
