@@ -1,0 +1,27 @@
+#define ll int
+class Solution {
+public:
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<vector<ll>> pq;
+        int i,j;
+        for(i=3;i<512;i++)
+        {
+            if(__builtin_popcount(i)==k)
+            {
+                vector<ll> v;
+                ll s=0;
+                for(j=0;j<9;j++)
+                {
+                    if(i&(1<<j))
+                    {
+                        s+=(j+1);
+                        v.push_back(j+1);
+                    }
+                }
+                if(s==n)
+                    pq.push_back(v);
+            }
+        }
+        return pq;
+    }
+};
